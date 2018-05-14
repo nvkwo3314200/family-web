@@ -43,10 +43,10 @@
 			<ignoreColumn column="FRED" />
 			<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
 		</table>
-		
-		<table tableName="tbl_emp" domainObjectName="Employee"> </table> 
-		<table tableName="tbl_dept" domainObjectName="Department"> </table>
 		 -->
+		 <!-- 
 		 <table tableName="alipay_bill" domainObjectName="AlipayBill"> </table>
+		  -->
+		 <table tableName="type_param" domainObjectName="TypeParam"> </table>
 	</context>
 </generatorConfiguration>
