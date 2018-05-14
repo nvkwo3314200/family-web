@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.peak.dao.AlipayBillMapper">
+  <resultMap id="BaseResultMap" type="com.peak.bean.AlipayBill">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="transaction_id" jdbcType="VARCHAR" property="transactionId" />
+    <result column="shop_order_id" jdbcType="VARCHAR" property="shopOrderId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="pay_date" jdbcType="TIMESTAMP" property="payDate" />
+    <result column="last_update_date" jdbcType="TIMESTAMP" property="lastUpdateDate" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="counterparty" jdbcType="VARCHAR" property="counterparty" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="amount" jdbcType="REAL" property="amount" />
+    <result column="income_expenses" jdbcType="VARCHAR" property="incomeExpenses" />
+    <result column="trade_status" jdbcType="VARCHAR" property="tradeStatus" />
+    <result column="service_charge" jdbcType="REAL" property="serviceCharge" />
+    <result column="refund" jdbcType="VARCHAR" property="refund" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+    <result column="funded_status" jdbcType="VARCHAR" property="fundedStatus" />
+    <result column="use_type" jdbcType="VARCHAR" property="useType" />
+    <result column="human_type" jdbcType="VARCHAR" property="humanType" />
+    <result column="obj_type" jdbcType="VARCHAR" property="objType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, transaction_id, shop_order_id, create_date, pay_date, last_update_date, source, 
+    type, counterparty, product_name, amount, income_expenses, trade_status, service_charge, 
+    refund, mark, funded_status, use_type, human_type, obj_type
+  </sql>
+  <select id="selectByExample" parameterType="com.peak.bean.AlipayBillExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from alipay_bill
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.peak.bean.AlipayBillExample">
+    delete from alipay_bill
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.peak.bean.AlipayBill">
+    insert into alipay_bill (id, transaction_id, shop_order_id, 
+      create_date, pay_date, last_update_date, 
+      source, type, counterparty, 
+      product_name, amount, income_expenses, 
+      trade_status, service_charge, refund, 
+      mark, funded_status, use_type, 
+      human_type, obj_type)
+    values (#{id,jdbcType=INTEGER}, #{transactionId,jdbcType=VARCHAR}, #{shopOrderId,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{payDate,jdbcType=TIMESTAMP}, #{lastUpdateDate,jdbcType=TIMESTAMP}, 
+      #{source,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{counterparty,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{amount,jdbcType=REAL}, #{incomeExpenses,jdbcType=VARCHAR}, 
+      #{tradeStatus,jdbcType=VARCHAR}, #{serviceCharge,jdbcType=REAL}, #{refund,jdbcType=VARCHAR}, 
+      #{mark,jdbcType=VARCHAR}, #{fundedStatus,jdbcType=VARCHAR}, #{useType,jdbcType=VARCHAR}, 
+      #{humanType,jdbcType=VARCHAR}, #{objType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.peak.bean.AlipayBill">
+    insert into alipay_bill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="transactionId != null">
+        transaction_id,
+      </if>
+      <if test="shopOrderId != null">
+        shop_order_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="payDate != null">
+        pay_date,
+      </if>
+      <if test="lastUpdateDate != null">
+        last_update_date,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="counterparty != null">
+        counterparty,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="incomeExpenses != null">
+        income_expenses,
+      </if>
+      <if test="tradeStatus != null">
+        trade_status,
+      </if>
+      <if test="serviceCharge != null">
+        service_charge,
+      </if>
+      <if test="refund != null">
+        refund,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+      <if test="fundedStatus != null">
+        funded_status,
+      </if>
+      <if test="useType != null">
+        use_type,
+      </if>
+      <if test="humanType != null">
+        human_type,
+      </if>
+      <if test="objType != null">
+        obj_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="transactionId != null">
+        #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopOrderId != null">
+        #{shopOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payDate != null">
+        #{payDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateDate != null">
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="counterparty != null">
+        #{counterparty,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=REAL},
+      </if>
+      <if test="incomeExpenses != null">
+        #{incomeExpenses,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeStatus != null">
+        #{tradeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCharge != null">
+        #{serviceCharge,jdbcType=REAL},
+      </if>
+      <if test="refund != null">
+        #{refund,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="fundedStatus != null">
+        #{fundedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="useType != null">
+        #{useType,jdbcType=VARCHAR},
+      </if>
+      <if test="humanType != null">
+        #{humanType,jdbcType=VARCHAR},
+      </if>
+      <if test="objType != null">
+        #{objType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.peak.bean.AlipayBillExample" resultType="java.lang.Long">
+    select count(*) from alipay_bill
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update alipay_bill
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.transactionId != null">
+        transaction_id = #{record.transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopOrderId != null">
+        shop_order_id = #{record.shopOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payDate != null">
+        pay_date = #{record.payDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateDate != null">
+        last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.source != null">
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.counterparty != null">
+        counterparty = #{record.counterparty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null">
+        amount = #{record.amount,jdbcType=REAL},
+      </if>
+      <if test="record.incomeExpenses != null">
+        income_expenses = #{record.incomeExpenses,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeStatus != null">
+        trade_status = #{record.tradeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceCharge != null">
+        service_charge = #{record.serviceCharge,jdbcType=REAL},
+      </if>
+      <if test="record.refund != null">
+        refund = #{record.refund,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mark != null">
+        mark = #{record.mark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fundedStatus != null">
+        funded_status = #{record.fundedStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useType != null">
+        use_type = #{record.useType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.humanType != null">
+        human_type = #{record.humanType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.objType != null">
+        obj_type = #{record.objType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update alipay_bill
+    set id = #{record.id,jdbcType=INTEGER},
+      transaction_id = #{record.transactionId,jdbcType=VARCHAR},
+      shop_order_id = #{record.shopOrderId,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      pay_date = #{record.payDate,jdbcType=TIMESTAMP},
+      last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      source = #{record.source,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      counterparty = #{record.counterparty,jdbcType=VARCHAR},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      amount = #{record.amount,jdbcType=REAL},
+      income_expenses = #{record.incomeExpenses,jdbcType=VARCHAR},
+      trade_status = #{record.tradeStatus,jdbcType=VARCHAR},
+      service_charge = #{record.serviceCharge,jdbcType=REAL},
+      refund = #{record.refund,jdbcType=VARCHAR},
+      mark = #{record.mark,jdbcType=VARCHAR},
+      funded_status = #{record.fundedStatus,jdbcType=VARCHAR},
+      use_type = #{record.useType,jdbcType=VARCHAR},
+      human_type = #{record.humanType,jdbcType=VARCHAR},
+      obj_type = #{record.objType,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
